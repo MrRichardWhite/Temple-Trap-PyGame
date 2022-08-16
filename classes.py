@@ -1,5 +1,7 @@
 # ---------------------------------------------------------------- #
 
+import random
+
 import pygame as pg
 
 from widgets.single import *
@@ -247,9 +249,11 @@ class Board(Buttons):
                         if self.empty_tile in self.neighbour_coordinates(tile_name, -1):
                             self.mapping_position[tile_name] = self.empty_tile
                             self.update_tiles_position()
+                            random.choice(moving_tiles).play()
                     else:
                         self.player.coordinates = tile_coordinates
                         self.update_player_position()
+                        random.choice(moving_player).play()
 
                     self.ghost_players = []
 

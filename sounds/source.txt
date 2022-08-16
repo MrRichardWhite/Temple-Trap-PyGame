@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------- #
+
+https://www.zapsplat.com/:
+
+moving_tile_0.mp3:
+zapsplat_foley_heavy_flat_stone_very_sort_drag_scrape_001_87117.mp3
+
+moving_tile_1.mp3:
+zapsplat_foley_heavy_flat_stone_very_sort_drag_scrape_002_87118.mp3
+
+# ---------------------------------------------------------------- #
+
+Mojang:
+
+moving_player_1.ogg:
+step1.ogg
+
+moving_player_2.ogg:
+step2.ogg
+
+moving_player_3.ogg:
+step3.ogg
+
+moving_player_4.ogg:
+step4.ogg
+
+moving_player_5.ogg:
+step5.ogg
+
+moving_player_6.ogg:
+step6.ogg
+
+# ---------------------------------------------------------------- #

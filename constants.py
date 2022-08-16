@@ -14,6 +14,10 @@ icon = pg.image.load("images//icon.png")
 bg_menu = pg.image.load("images//background.png")
 bg_board = pg.image.load("images//board.png")
 
+pg.mixer.init()
+moving_player = [pg.mixer.Sound(f"sounds//moving_player_{i}.ogg") for i in [1, 2, 3, 4, 5, 6]]
+moving_tiles = [pg.mixer.Sound(f"sounds//moving_tile_{i}.mp3") for i in [0, 1]]
+
 adjacency_list = []
 with open("adjacency_list.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file)
