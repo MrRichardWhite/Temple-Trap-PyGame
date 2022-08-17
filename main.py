@@ -116,7 +116,9 @@ def play(board):
             button_quit.update(event)
             game.update(event)
 
-            if button_quit.clicked(event) or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE): return True
+            if button_quit.clicked(event) or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                if button_quit.clicked(event): random.choice(moving_tiles + moving_player).play()
+                return True
 
 def boards():
 
@@ -184,11 +186,13 @@ def boards():
             if boards_album.on_first_page:
                 buttons["button menu"].update(event)
                 if buttons["button menu"].clicked(event):
+                    random.choice(moving_tiles + moving_player).play()
                     export_boards_album(boards_album)
                     return True
             else:
                 buttons["button back"].update(event)
                 if buttons["button back"].clicked(event) or (event.type == pg.KEYDOWN and event.key == pg.K_LEFT):
+                    if buttons["button back"].clicked(event): random.choice(moving_tiles + moving_player).play()
                     boards_album.move("back")
                     text_box_board_name.text_string_clicked = boards_album.page_current.name
 
@@ -196,6 +200,8 @@ def boards():
 
                 buttons["button play"].update(event)
                 if buttons["button play"].clicked(event):
+
+                    random.choice(moving_tiles + moving_player).play()
 
                     export_boards_album(boards_album)
 
@@ -216,6 +222,7 @@ def boards():
             if boards_album.on_last_page:
                 buttons["button new board"].update(event)
                 if buttons["button new board"].clicked(event):
+                    random.choice(moving_tiles + moving_player).play()
                     boards_album.pages.append(BoardEdit(screen))
                     boards_album.move("next")
                     text_box_board_name.text_string_clicked = boards_album.page_current.name
@@ -223,10 +230,13 @@ def boards():
                 if boards_album.pages_amount > 1:
                     buttons["button next"].update(event)
                     if buttons["button next"].clicked(event) or (event.type == pg.KEYDOWN and event.key == pg.K_RIGHT):
+                        if buttons["button next"].clicked(event): random.choice(moving_tiles + moving_player).play()
                         boards_album.move("next")
                         text_box_board_name.text_string_clicked = boards_album.page_current.name
 
             text_box_board_name.update(event)
+            if text_box_board_name.clicked(event):
+                random.choice(moving_tiles + moving_player).play()
             if text_box_board_name.clicked():
                 boards_album.page_current.name = text_box_board_name.text_string_clicked
 
@@ -265,14 +275,18 @@ def menu():
 
             buttons.update(event)
 
-            if buttons["button quit"].clicked(event): return False
+            if buttons["button quit"].clicked(event):
+                sound = random.choice(moving_tiles + moving_player)
+                sound.play()
+                time.sleep(sound.get_length()-0.1)
+                return False
 
             if buttons["button manual"].clicked(event):
-                os.chdir("manual")
+                random.choice(moving_tiles + moving_player).play()
                 os.startfile("manual.pdf")
-                os.chdir("..")
 
             if buttons["button boards"].clicked(event):
+                random.choice(moving_tiles + moving_player).play()
                 run = boards()
                 if run: screen = pg.display.set_mode((512, 512))
 

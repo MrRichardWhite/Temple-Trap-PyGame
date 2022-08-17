@@ -458,6 +458,7 @@ class BoardEdit(Box):
 
                             tile.name = tile_name
                             self.bench.member_clicked.placed = True
+                            random.choice(moving_tiles).play()
                             tile.rotation = tile_rotation
 
                 else:
@@ -469,14 +470,19 @@ class BoardEdit(Box):
                             self.bench.member_clicked_index = None
 
                     if self.bench.member_clicked_index is not None:
+
                         if self.bench.member_clicked.name == tile.name:
+                            random.choice(moving_tiles).play()
                             tile.rotation = (tile.rotation + 1) % 4
+
+                        elif self.bench.member_clicked.name == "player" and tile.name not in ["parallel", "plus", "square"]:
+                            if self.player_coordinates != self.field.mapping_position[i]:
+                                random.choice(moving_player).play()
+                            self.player_coordinates = self.field.mapping_position[i]
+                            self.bench.member_clicked.placed = True
+
                         else:
-                            if self.bench.member_clicked.name == "player" and tile.name not in ["parallel", "plus", "square"]:
-                                self.player_coordinates = self.field.mapping_position[i]
-                                self.bench.member_clicked.placed = True
-                            else:
-                                self.bench.member_clicked_index = tile.name
+                            self.bench.member_clicked_index = tile.name
                     else:
                         self.bench.member_clicked_index = tile.name
 
@@ -485,18 +491,24 @@ class BoardEdit(Box):
         for tile in self.bench:
             if tile.clicked(event):
                 if tile.placed:
-                    if tile.name != "player":
+                    if tile.name == "player":
+
+                        self.player_coordinates = None
+                        random.choice(moving_player).play()
+                        self.bench["player"].placed = False
+
+                    else:
 
                         if self.occupied(tile.name):
                             self.player_coordinates = None
+                            random.choice(moving_player).play()
                             self.bench["player"].placed = False
 
                         self.field[tile.name].image_path = None
+                        random.choice(moving_tiles).play()
+                        tile.placed = False
                         self.field[tile.name].rotation = 0
                         self.field[tile.name].name = ""
 
-                    else:
-                        self.player_coordinates = None
-                    tile.placed = False
 
 # ---------------------------------------------------------------- #
